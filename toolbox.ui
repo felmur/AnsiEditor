@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ToolBox</class>
+ <widget class="QFrame" name="ToolBox">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>70</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Frame</string>
+  </property>
+  <widget class="QToolButton" name="tbpick">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Picks colors of clicked text</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/image/pick</normaloff>:/image/pick</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>46</width>
+     <height>46</height>
+    </size>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="tbsquare">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>65</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Draws a square frame</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/image/square</normaloff>:/image/square</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>46</width>
+     <height>46</height>
+    </size>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="tbsquarefill">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>120</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Draws a square filled</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/image/squarefilled</normaloff>:/image/squarefilled</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>42</width>
+     <height>42</height>
+    </size>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="tbapplyAttrs">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>175</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Apply ForeGround &amp; Background &amp; Blink to selection</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/image/applyform-icon</normaloff>:/image/applyform-icon</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>42</width>
+     <height>42</height>
+    </size>
+   </property>
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+  </widget>
+ </widget>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>tbpick</sender>
+   <signal>released()</signal>
+   <receiver>ToolBox</receiver>
+   <slot>pickClick()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>33</x>
+     <y>33</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>34</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tbsquare</sender>
+   <signal>released()</signal>
+   <receiver>ToolBox</receiver>
+   <slot>squareClick()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>33</x>
+     <y>88</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>34</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tbsquarefill</sender>
+   <signal>released()</signal>
+   <receiver>ToolBox</receiver>
+   <slot>squarefillClick()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>33</x>
+     <y>143</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>34</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tbapplyAttrs</sender>
+   <signal>released()</signal>
+   <receiver>ToolBox</receiver>
+   <slot>applyAttrsClick()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>33</x>
+     <y>198</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>34</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>pickClick()</slot>
+  <slot>squareClick()</slot>
+  <slot>squarefillClick()</slot>
+  <slot>applyAttrsClick()</slot>
+ </slots>
+</ui>

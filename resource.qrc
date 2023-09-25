@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/font">
+        <file alias="hack">font/Hack-Regular.ttf</file>
+    </qresource>
+    <qresource prefix="/image">
+        <file alias="pick">image/pickcolor-icon.png</file>
+        <file alias="square">image/square-icon.png</file>
+        <file alias="squarefilled">image/squarefilled-icon.png</file>
+        <file alias="icon">image/AnsiEditor.png</file>
+        <file alias="applyform-icon">image/applyform-icon.png</file>
+    </qresource>
+    <qresource prefix="/ansi">
+        <file alias="test">ansi/test1.ans</file>
+    </qresource>
+</RCC>

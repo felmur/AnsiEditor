@@ -1,0 +1,11 @@
+[Desktop Entry]
+GenericName=Ansi Editor
+Name=AnsiEditor
+Comment=ANSI CP437 File Editor
+Exec=ansieditor %U
+StartupNotify=true
+Icon=AnsiEditor
+Type=Application
+Categories=Qt;KDE;Utility;TextEditor;Development;
+Keywords=ansi;ans;text;txt;editor;programming;programmer;development;developer;code;
+
