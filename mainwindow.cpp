@@ -201,7 +201,7 @@ bool MainWindow::loadFile(QString filename)
         QString s = contents.right(129);
         memcpy(sc,contents.right(128).data(),128);
         if (s.startsWith(eof+"SAUCE00")) {
-            contents = contents.left(contents.length()-128);
+            contents = contents.left(contents.length()-129);
             memcpy((void *)&sauce, sc,128);
             char ss[36];
             cout << "Sauce infos:" << endl;
