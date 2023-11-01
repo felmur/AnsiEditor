@@ -16,7 +16,7 @@
 QString prgname = "AnsiEditor";
 QString copyright = "(c) 2023 by Felice Murolo, Salerno - Italia";
 QString license = "All rights reserved, released under GPL3 license";
-QString version = "1.4.3a";
+QString version = "1.4.4a";
 
 extern QString fileToLoad;
 
@@ -25,6 +25,10 @@ Palette *pal=nullptr;
 GliphForm *gl=nullptr;
 ToolBox *tb=nullptr;
 SauceForm *sf=nullptr;
+
+#include "sauce.h"
+QString eof= QChar(26);
+struct _sauce sauce;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -71,7 +75,6 @@ MainWindow::MainWindow(QWidget *parent)
         loadFile(":/ansi/test");
     }
     showStatus();
-
 }
 
 MainWindow::~MainWindow()
@@ -185,6 +188,8 @@ void MainWindow::actionClick(QAction *a)
 bool MainWindow::loadFile(QString filename)
 {
     bool ret=false;
+    QString eof= QChar(26);
+    char sc[128];
 
     QFile f(filename);
     if ((f.open(QFile::ReadOnly))){
@@ -193,6 +198,26 @@ bool MainWindow::loadFile(QString filename)
         if (!filename.startsWith(":")) document = filename;
         QByteArray contents = f.readAll();
         f.close();
+        QString s = contents.right(129);
+        memcpy(sc,contents.right(128).data(),128);
+        if (s.startsWith(eof+"SAUCE00")) {
+            contents = contents.left(contents.length()-128);
+            memcpy((void *)&sauce, sc,128);
+            char ss[36];
+            cout << "Sauce infos:" << endl;
+            memcpy(ss,sauce.title,35);
+            ss[35]=0;
+            cout << "Title: " << ss << endl;
+            memcpy(ss,sauce.author,20);
+            ss[20]=0;
+            cout << "Author: " << ss << endl;
+            memcpy(ss,sauce.group,20);
+            ss[20]=0;
+            cout << "Group: " << ss << endl;
+            memcpy(ss,sauce.date,8);
+            ss[8]=0;
+            cout << "Date: " << ss << endl;
+        }
         QList<QByteArray> lines = contents.split('\n');
         foreach(QByteArray l, lines) {
             av->parseTxt(l.data());

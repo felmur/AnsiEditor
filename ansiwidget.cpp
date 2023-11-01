@@ -16,8 +16,8 @@ extern ToolBox *tb;
 QCodePage437Codec *qp=nullptr;
 
 #include "sauce.h"
-QString eof= QChar(26);
-struct _sauce sauce;
+extern QString eof;
+extern struct _sauce sauce;
 
 
 AnsiWidget::AnsiWidget(QWidget *parent)
@@ -94,25 +94,7 @@ void AnsiWidget::parseTxt(char *str){
     if (!strlen(str)) return;
 
     _str = str;
-    if (_str.startsWith(eof+"COMNT")) {
-        return;
-    }
-    if (_str.startsWith(eof+"SAUCE00") and _str.length()<=129) {
-        memcpy((void *)&sauce, str+1,strlen(str)-1);
-        char ss[36];
-        cout << "Sauce infos:" << endl;
-        memcpy(ss,sauce.title,35);
-        ss[35]=0;
-        cout << "Title: " << ss << endl;
-        memcpy(ss,sauce.author,20);
-        ss[20]=0;
-        cout << "Author: " << ss << endl;
-        memcpy(ss,sauce.group,20);
-        ss[20]=0;
-        cout << "Group: " << ss << endl;
-        memcpy(ss,sauce.date,8);
-        ss[8]=0;
-        cout << "Date: " << ss << endl;
+    if (_str.startsWith(eof+"COMNT") || _str.startsWith(eof+"SAUCE00")) {
         return;
     }
 
@@ -937,6 +919,6 @@ void AnsiWidget::applyAttrs()
         *(attrs+offs) = (uint8_t) a;
         emit documentModified();
     }
-    repaint();
+    //repaint();
 }
 
