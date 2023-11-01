@@ -1,3 +1,10 @@
+/*****************************************************************************
+ * ANSIEDITOR
+ * (c) 2023 by Felice Murolo, Salerno - Italia
+ * All rights reserved, released under GPL3 license
+ *
+ ****************************************************************************/
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "ansiwidget.h"
