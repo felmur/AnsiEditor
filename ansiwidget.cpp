@@ -457,11 +457,11 @@ bool AnsiWidget::saveFile(QString filename)
                 f.write(t);
                 size+=1;
             }
-            f.write("\r\n");
+            if (i<r-1) f.write("\r\n");
             size+=2;
         }
         f.write(TC(csi));
-        f.write("0m\n");
+        f.write("0m\r\n");
         size+=5;
         sauce.tinfo2 = (uint16_t) r+1;
         sauce.size = (uint32_t) size;
