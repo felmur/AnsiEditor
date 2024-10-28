@@ -71,6 +71,7 @@ private:
         QColor(255, 255, 255),    // white
         QColor(255, 255, 255,150) // cursor
     };
+    QString lastclip="";
 
     QString esc = QChar(27);
     QString csi = esc + "[";

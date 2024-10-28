@@ -23,7 +23,7 @@
 QString prgname = "AnsiEditor";
 QString copyright = "(c) 2023 by Felice Murolo, Salerno - Italia";
 QString license = "All rights reserved, released under GPL3 license";
-QString version = "1.4.5a";
+QString version = "1.5.0a";
 
 extern QString fileToLoad;
 

@@ -8,6 +8,7 @@
 #include "toolbox.h"
 #include <QFile>
 #include <QDate>
+#include <QClipboard>
 
 
 extern Palette *pal;
@@ -825,13 +826,38 @@ QString AnsiWidget::getSelection(bool cut)
     cfin=0;
     rfin=0;
     rubber->setGeometry(0,0,0,0);
+    lastclip = ret;
     return ret;
 }
 
 void AnsiWidget::ansiPaste()
 {
     int offs,i,op,k;
+    uint8_t a=0;
     QList<QByteArray> lines;
+
+    QClipboard *cb = QGuiApplication::clipboard();
+
+    if ((cb->text() != lastclip)) {
+        paste.pasteattrs.clear();
+        paste.pastetxt.clear();
+        offs=csrow*cols+cscol;
+        QStringList tt = cb->text().split("\n");
+        foreach(auto t, tt) {
+            if (t != ""){
+                paste.pastetxt.append(t.toLocal8Bit().data());
+                paste.pastetxt.append('\x00');
+                for(uint m=0; m<strlen(t.toLocal8Bit().data()); m++){
+                    QList<int> c = pal->getColors();
+                    a = (uint8_t) ((c[0] & 0x0f) << 4) + (c[1] & 0x07);
+                    if (blinkwrt) a |= 8;
+                    paste.pasteattrs.append(a);
+                }
+                offs+=cols;
+            }
+        }
+    }
+
     if (paste.pastetxt.length()){
         op = 1;
         offs=csrow*cols+cscol;
