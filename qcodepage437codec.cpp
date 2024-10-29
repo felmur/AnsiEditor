@@ -98,6 +98,28 @@ int QCodePage437Codec::mibEnum() const
     return 437;
 }
 
+QByteArray QCodePage437Codec::utf8tocp437(QString ba)
+{
+    uint i=0;
+    bool flg=false;
+    QByteArray s;
+
+    QString a = ba;
+
+    foreach(auto e, a){
+        flg = false;
+        for(i=0; i<256; i++){
+            if (cp437ToUnicode[i] == e.unicode()){
+                s.append(i);
+                flg = true;
+                break;
+            }
+        }
+        if (!flg) s.append('?');
+    }
+    return s;
+}
+
 QString QCodePage437Codec::convertToUnicode(const char *in, int length, ConverterState *) const
 {
     QString str;

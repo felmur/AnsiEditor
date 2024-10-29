@@ -15,6 +15,7 @@ public:
     QByteArray name() const;
     QList<QByteArray> aliases() const;
     int mibEnum() const;
+    QByteArray utf8tocp437(QString ba);
 
 private:
 

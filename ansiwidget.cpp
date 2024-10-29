@@ -837,6 +837,7 @@ void AnsiWidget::ansiPaste()
     QList<QByteArray> lines;
 
     QClipboard *cb = QGuiApplication::clipboard();
+    QCodePage437Codec *cp = new QCodePage437Codec();
 
     if ((cb->text() != lastclip)) {
         paste.pasteattrs.clear();
@@ -845,9 +846,10 @@ void AnsiWidget::ansiPaste()
         QStringList tt = cb->text().split("\n");
         foreach(auto t, tt) {
             if (t != ""){
-                paste.pastetxt.append(t.toLocal8Bit().data());
+                QByteArray s = cp->utf8tocp437(t);
+                paste.pastetxt.append(s);
                 paste.pastetxt.append('\x00');
-                for(uint m=0; m<strlen(t.toLocal8Bit().data()); m++){
+                for(uint m=0; m<s.length(); m++){
                     QList<int> c = pal->getColors();
                     a = (uint8_t) ((c[0] & 0x0f) << 4) + (c[1] & 0x07);
                     if (blinkwrt) a |= 8;
@@ -857,6 +859,8 @@ void AnsiWidget::ansiPaste()
             }
         }
     }
+
+    delete cp;
 
     if (paste.pastetxt.length()){
         op = 1;
